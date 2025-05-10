@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: "Open Sans", sans-serif;
+      display: grid;
+      place-content: center;
+      background-color: #ebebeb;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .main {
+      margin-top: 30px;
+      border: 8px solid #dddddd;
+      border-radius: 24px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .name {
+      display: flex;
+      font-size: 20px;
+      padding: 8px 16px;
+      color: #7e7e7e;
+      background-color: #ebebeb;
+    }
+
+    .name-input {
+      font-size: 18px;
+      flex-grow: 1;
+      border: none;
+      margin: 0 12px;
+      outline: none;
+      background-color: #ebebeb;
+    }
+
+    .message-container {
+      display: flex;
+      flex-direction: column;
+      background-color: #f6f6f6;
+      width: 400px;
+      height: 500px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 10px;
+    }
+
+    .message-left,
+    .message-right {
+      list-style: none;
+      padding: 8px 12px;
+      margin: 10px;
+      max-width: 250px;
+      font-size: 16px;
+      word-wrap: break-word;
+      border-radius: 20px;
+    }
+
+    .message-left {
+      align-self: flex-start;
+      background-color: #ffffff;
+      box-shadow: -2px 2px 4px #dcdcdc;
+    }
+
+    .message-right {
+      align-self: flex-end;
+      background-color: #2d2d2d;
+      color: #ffffff;
+      box-shadow: 2px 2px 4px #dcdcdc;
+    }
+
+    .message-left span,
+    .message-right span {
+      display: block;
+      font-size: 12px;
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    .message-form {
+      display: flex;
+      justify-content: space-between;
+      width: 400px;
+      padding: 10px;
+      background-color: #ebebeb;
+    }
+
+    .message-input {
+      flex-grow: 1;
+      height: 40px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      padding: 0 12px;
+    }
+
+    .send-button {
+      height: 40px;
+      font-size: 16px;
+      border: none;
+      padding: 0 16px;
+      background-color: #2d2d2d;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main">
+    <div class="name">
+      <i class="far fa-user"></i>
+      <input type="text" id="name-input" class="name-input" value="anonymous" maxlength="20" />
+    </div>
+
+    <ul class="message-container" id="message-container"></ul>
+
+    <form class="message-form" id="message-form">
+      <input type="text" id="message-input" class="message-input" placeholder="Type your message..." required />
+      <button type="submit" class="send-button">Send</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const messageForm = document.getElementById("message-form");
+      const nameInput = document.getElementById("name-input");
+      const messageInput = document.getElementById("message-input");
+      const messageContainer = document.getElementById("message-container");
+
+      function loadMessages() {
+        fetch("chat.php")
+          .then((res) => res.json())
+          .then((messages) => {
+            messageContainer.innerHTML = "";
+            const currentUser = nameInput.value.trim();
+
+            messages.forEach((msg) => {
+              const li = document.createElement("li");
+              li.className = msg.sender_name === currentUser ? "message-right" : "message-left";
+              li.innerHTML = `<p>${msg.message_text}<span>${msg.sender_name} | ${msg.created_at}</span></p>`;
+              messageContainer.appendChild(li);
+            });
+
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+          });
+      }
+
+      messageForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const sender = nameInput.value.trim();
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        fetch("chat.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: `sender_name=${encodeURIComponent(sender)}&message_text=${encodeURIComponent(message)}`
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            messageInput.value = "";
+            loadMessages();
+          } else {
+            alert(data.error || "Message not sent.");
+          }
+        });
+      });
+
+      loadMessages();
+      setInterval(loadMessages, 2000);
+    });
+  </script>
+</body>
+</html>

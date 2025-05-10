@@ -1,0 +1,116 @@
+
+/* Form Section */
+.form {
+    margin: 50px auto 40px;
+    padding: 30px;
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    animation: slideIn 1s ease-out;
+}
+
+.form h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form h2::after {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+form table {
+    width: 100%;
+}
+
+form th,
+form td {
+    padding: 15px;
+    text-align: left;
+}
+
+form th {
+    width: 35%;
+    font-weight: bold;
+    color: var(--primary-color);
+    vertical-align: top;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+textarea {
+    text-align: left; /* Aligns text to the left inside the textarea */
+    resize: vertical; /* Optional: allows vertical resizing of textarea */
+}
+
+
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+    outline: none;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+/* File Input */
+input[type="file"] {
+    border: none;
+    background-color: var(--background-color);
+}
+
+/* Buttons */
+input[type="submit"],
+input[type="reset"] {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--white);
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background: #388e3c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+input[type="reset"]:hover {
+    background: var(--error-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+

@@ -1,0 +1,151 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures content is vertically centered */
+    padding: 20px; /* Add padding for smaller screens */
+    background-color: var(--background-color, #f4f4f9);
+}
+
+/* Form Styling */
+.form {
+    background: var(--white, #fff);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    width: 100%;
+    max-width: 400px; /* Restrict width on larger screens */
+    text-align: center;
+}
+
+.form h2 {
+    font-size: 1.8rem;
+    color: var(--text-color, #333);
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: var(--text-color, #555);
+    text-align: left; /* Align labels to the left */
+    font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background-color: #fafafa; /* Subtle background for input */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: var(--primary-color, #56ab2f); /* Highlighted border */
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--white, #fff);
+    background: var(--primary-color, #56ab2f); /* Primary color button */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background: #388e3c; /* Change to a darker shade for hover effect */
+}
+
+.search-bar button {
+    width: 20%;
+    padding: 10px 20px;
+    background-color: var(--secondary-color, #388e3c); /* Different background color for the search button */
+    color: var(--white, #fff);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+/* Search button hover effect */
+.search-bar button:hover {
+    background-color: var(--primary-color, #56ab2f); /* Change on hover */
+}
+
+button:hover {
+    background: #388e3c; /* Darker green for hover */
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+/* Register Link */
+.register-link {
+    font-size: 0.9rem;
+    color: var(--text-color, #555);
+    margin-top: 15px;
+}
+
+.register-link a {
+    color: var(--primary-color, #56ab2f);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Section */
+.footer {
+    text-align: center;
+    background: var(--text-color, #333);
+    color: var(--white, #fff);
+    padding: 10px 0;
+    font-size: 0.9rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto; /* Push footer to bottom */
+}
+
+
+.adminPatSignUP {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    margin-top: 50px; /* Space from the top */
+}
+
+.adminPatSignUP button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.adminPatSignUP button a {
+    color: white;
+    text-decoration: none;
+}
+
+.adminPatSignUP button:hover {
+    background-color: #45a049;
+}
